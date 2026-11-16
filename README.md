@@ -1,88 +1,89 @@
 # S+QDCP Command Center
 ## PT. ALFA VALVES INDONESIA
 
-**Versi 1.2 — Aturan Warna Harian + Supabase Cloud Sync/Realtime**
+**Versão 1.2 — Regras de cores diárias + Supabase Cloud Sync/Realtime**
 
-Dashboard web statis untuk pemantauan **Safety, 5S, Quality, Delivery, Cost, dan People** selama satu bulan penuh.
+Painel (dashboard) web estático para acompanhar **Segurança (Safety), 5S, Qualidade (Quality), Entrega (Delivery), Custo (Cost) e Pessoas (People)** ao longo de um mês inteiro.
 
-## Fitur
+## Recursos
 
-- Overview enam kartu KPI dengan kontur tanggal berbentuk **S, 5, Q, D, C, P**.
-- Aturan warna tanggal dengan prioritas: **merah** jika ada Near Miss/Accident pada Safety; **biru** untuk Sabtu, Minggu, libur nasional, dan cuti bersama; **hijau** jika data terisi dan target tercapai; **kuning** jika data terisi tetapi target tidak tercapai; **abu-abu** jika belum ada data.
-- Jika kejadian Safety terjadi pada weekend/libur, penanda tetap **merah** agar kejadian tidak tertutupi warna hari libur.
-- Input langsung melalui tabel web untuk seluruh tanggal dalam bulan.
-- Impor/ekspor workbook Excel enam sheet: `SAFETY`, `5S`, `QUALITY`, `DELIVERY`, `COST`, `PEOPLE`.
-- Generator template Excel sesuai bulan aktif.
-- Perhitungan otomatis FTP, output testing/painting, extra hours, dan attendance.
-- Pengaturan target KPI dan hari libur kustom.
-- Action plan per kategori.
-- Mode terang/gelap.
-- Bahasa Indonesia/Inggris.
-- Unduh overview sebagai PDF A3 landscape.
-- Responsif untuk desktop, tablet, dan ponsel.
-- Penyimpanan lokal sebagai fallback saat internet terputus.
-- **Supabase Cloud Sync + Realtime** untuk live update antar-PC dan HP.
+- Visão geral com seis cartões de KPI, em que os dias do mês formam o contorno das letras **S, 5, Q, D, C, P**.
+- Regras de cor dos dias, por prioridade: **vermelho** se houver quase acidente (Near Miss) ou acidente em Segurança; **azul** para sábado, domingo, feriado nacional e folga coletiva; **verde** se os dados foram preenchidos e a meta foi atingida; **amarelo** se os dados foram preenchidos, mas a meta não foi atingida; **cinza** se ainda não há dados.
+- Se uma ocorrência de Segurança acontecer em fim de semana ou feriado, o marcador continua **vermelho**, para que a ocorrência não fique escondida pela cor do dia de folga.
+- Lançamento direto em tabelas na web para todos os dias do mês.
+- Importação/exportação de planilha Excel com seis abas: `SAFETY`, `5S`, `QUALITY`, `DELIVERY`, `COST`, `PEOPLE`.
+- Gerador de modelo Excel conforme o mês ativo.
+- Cálculo automático de FTP (aprovação na 1ª vez), testes e pintura realizados, horas adicionais e presença.
+- Configuração das metas de KPI e de feriados personalizados.
+- Plano de ação por categoria.
+- Tema escuro (padrão) e tema claro, com barra lateral recolhível.
+- Fontes Inter, Space Grotesk e JetBrains Mono servidas da própria pasta (`vendor/fonts`), sem depender da internet.
+- Interface em português (padrão), indonésio e inglês.
+- Download da visão geral em PDF A3 paisagem.
+- Layout responsivo para desktop, tablet e celular.
+- Armazenamento local como reserva quando a internet cai.
+- **Supabase Cloud Sync + Realtime** para atualização ao vivo entre PCs e celulares.
 
-## Menjalankan
+## Como executar
 
-### Cara termudah
+### Jeito mais fácil
 
-Buka `index.html` di browser modern (Chrome, Edge, atau Firefox).
+Abra o `index.html` em um navegador moderno (Chrome, Edge ou Firefox).
 
-### Melalui web server lokal
+### Com um servidor web local
 
 ```bash
 python3 -m http.server 4173 --bind 0.0.0.0
 ```
 
-Lalu buka `http://localhost:4173`.
+Depois abra `http://localhost:4173`.
 
-## Upload ke hosting
+## Envio para a hospedagem
 
-Upload **seluruh isi folder ini**, termasuk folder `vendor`, ke folder publik hosting (misalnya `public_html`). Tidak diperlukan PHP, Node.js, atau proses build. Untuk sinkronisasi antarperangkat, buat project Supabase dan ikuti `CLOUD-SYNC-GUIDE.md`.
+Envie **todo o conteúdo desta pasta**, incluindo a pasta `vendor` (com a subpasta `vendor/fonts`), para a pasta pública da hospedagem (por exemplo, `public_html`). Não é preciso PHP, Node.js nem processo de build. Para sincronizar entre dispositivos, crie um projeto no Supabase e siga o `CLOUD-SYNC-GUIDE.md`.
 
-Cocok untuk:
+Funciona bem em:
 
-- cPanel/shared hosting
+- cPanel/hospedagem compartilhada
 - Netlify Drop
 - GitHub Pages
 - Cloudflare Pages
-- server intranet statis
+- servidor de intranet estático
 
-## Alur Excel
+## Fluxo do Excel
 
-1. Pilih periode bulan pada header.
-2. Buka **Data Harian**.
-3. Klik **Template Excel** untuk mengunduh workbook kosong sesuai jumlah hari pada bulan aktif.
-4. Isi workbook tanpa mengubah nama sheet atau urutan kolom.
-5. Klik **Impor Excel** dan pilih file tersebut.
-6. Klik **Unduh Excel** untuk membuat backup data dari browser.
+1. Escolha o mês no cabeçalho.
+2. Abra **Dados diários**.
+3. Clique em **Modelo Excel** para baixar uma planilha em branco com a quantidade de dias do mês ativo.
+4. Preencha a planilha sem alterar o nome das abas nem a ordem das colunas.
+5. Clique em **Importar Excel** e escolha o arquivo.
+6. Clique em **Baixar Excel** para fazer um backup dos dados do navegador.
 
-File dari dashboard dapat diimpor kembali ke dashboard. Baris tanggal boleh berisi tanggal Excel asli, format ISO, atau format tanggal umum.
+Os arquivos gerados pelo painel podem ser importados de volta no painel. A coluna de datas pode conter datas nativas do Excel, formato ISO ou formatos de data comuns.
 
-## Pergantian bulan
+## Troca de mês
 
-- Memilih bulan baru otomatis membuat periode terpisah.
-- Data bulan lama tidak hilang saat berpindah bulan.
-- Tombol **Clear bulan** hanya menghapus data harian pada bulan yang sedang aktif.
-- Target, action plan, tema, bahasa, dan hari libur kustom tidak ikut terhapus.
+- Escolher um novo mês cria automaticamente um período separado.
+- Os dados do mês anterior não se perdem ao trocar de mês.
+- O botão **Limpar mês** apaga somente os dados diários do mês que está ativo.
+- Metas, plano de ação, tema, idioma e feriados personalizados não são apagados.
 
-## Kalender libur
+## Calendário de feriados
 
-Kalender bawaan memuat libur nasional dan cuti bersama Indonesia tahun 2026 berdasarkan SKB 3 Menteri. Weekend selalu terdeteksi otomatis. Untuk tahun lain atau libur perusahaan, buka **Target KPI → Kalender Libur** lalu tambahkan tanggal secara manual.
+O calendário embutido traz os feriados nacionais e as folgas coletivas (*cuti bersama*) da Indonésia em 2026, com base no SKB 3 Menteri (decreto conjunto de três ministérios). Os fins de semana são sempre detectados automaticamente. Para outros anos ou para feriados da empresa, abra **Metas de KPI → Calendário de feriados** e adicione as datas manualmente.
 
-Sumber kalender 2026: Sekretariat Negara RI — https://setneg.go.id/baca/index/inilah_skb_3_menteri_libur_nasional_dan_cuti_bersama_2026
+Fonte do calendário de 2026: Secretaria de Estado da República da Indonésia — https://setneg.go.id/baca/index/inilah_skb_3_menteri_libur_nasional_dan_cuti_bersama_2026
 
-## Live update PC dan HP
+## Atualização ao vivo entre PC e celular
 
-Dashboard mendukung Supabase Realtime. Ikuti langkah lengkap pada **`CLOUD-SYNC-GUIDE.md`**:
+O painel é compatível com o Supabase Realtime. Siga o passo a passo completo em **`CLOUD-SYNC-GUIDE.md`**:
 
-1. Buat project Supabase.
-2. Jalankan `SUPABASE-SETUP.sql`.
-3. Isi Project URL dan Publishable/anon key pada `supabase-config.js`.
-4. Commit ke GitHub dan tunggu GitHub Pages selesai deploy.
-5. Pastikan indikator berubah menjadi **“Live • Cloud tersinkron”**.
+1. Crie um projeto no Supabase.
+2. Execute o `SUPABASE-SETUP.sql`.
+3. Preencha a Project URL e a Publishable/anon key em `supabase-config.js`.
+4. Faça o commit no GitHub e aguarde o GitHub Pages concluir a publicação.
+5. Confira se o indicador mudou para **“Ao vivo • Nuvem sincronizada”**.
 
-Tanpa konfigurasi Supabase, dashboard tetap berfungsi dalam mode lokal, tetapi data PC dan HP tidak akan sama. Lakukan backup berkala menggunakan **Unduh Excel**.
+Sem a configuração do Supabase, o painel continua funcionando em modo local, mas os dados do PC e do celular não serão os mesmos. Faça backups periódicos com **Baixar Excel**.
 
-Konfigurasi SQL yang disertakan memakai akses publik tanpa login sesuai pilihan saat ini. Untuk data produksi yang lebih aman, gunakan Supabase Authentication dan batasi hak edit.
+A configuração SQL incluída usa acesso público sem login, conforme a escolha atual. Para dados de produção com mais segurança, use o Supabase Authentication e restrinja a permissão de edição.

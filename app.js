@@ -1,5 +1,5 @@
 /* S+QDCP Command Center — PT. ALFA VALVES INDONESIA
-   Static, offline-friendly dashboard. Data is stored in the browser. */
+   Painel estático que funciona offline. Os dados ficam guardados no navegador. */
 (() => {
   'use strict';
 
@@ -9,6 +9,56 @@
   const NS = 'http://www.w3.org/2000/svg';
 
   const I18N = {
+    pt: {
+      appName: 'S+QDCP Command Center', dashboard: 'Resumo de Desempenho', dashboardSub: 'Sistema integrado de monitoramento operacional',
+      navigation: 'Navegação', overview: 'Visão geral', dailyData: 'Dados diários', targets: 'Metas de KPI', actionPlan: 'Plano de ação',
+      systemStatus: 'Status do sistema', localStorage: 'Armazenamento local', active: 'Ativo', version: 'Versão 1.2 • Sincronização na nuvem',
+      importExcel: 'Importar Excel', exportExcel: 'Baixar Excel', pdf: 'Baixar PDF', theme: 'Alternar tema', menu: 'Abrir menu',
+      monthlyOverview: 'Visão geral mensal S+QDCP', monthlyDesc: 'Acompanhe Segurança, 5S, Qualidade, Entrega, Custo e Pessoas em uma única tela.',
+      liveData: 'Dados salvos automaticamente', cloudLive: 'Ao vivo • Nuvem sincronizada', cloudConnecting: 'Conectando à nuvem…', cloudSaving: 'Salvando na nuvem…', cloudLocal: 'Modo local • Nuvem não configurada', cloudError: 'Nuvem desconectada • Dados continuam locais', cloudUpdated: 'Dados mais recentes recebidos', cloudSetupTitle: 'Status da sincronização na nuvem', cloudSetupMissing: 'Preencha a Project URL e a Publishable/anon key no arquivo supabase-config.js e publique novamente no GitHub Pages.', cloudSetupReady: 'Os dados do painel são sincronizados automaticamente entre os dispositivos pelo Supabase Realtime.', syncNow: 'Sincronizar agora', workingDays: 'Dias úteis', kpiMet: 'KPIs dentro da meta', atRisk: 'KPIs em risco', completeness: 'Preenchimento dos dados',
+      performanceContour: 'Contornos de desempenho diário', contourDesc: 'Clique no número de um dia para abrir os dados diários.', daily: 'Diário', weekly: 'Semanal',
+      target: 'Meta', monthlyActual: 'Realizado no mês', met: 'Dentro da meta', warning: 'Requer atenção', risk: 'Em risco', noData: 'Sem dados',
+      safetyIncident: 'Ocorrência de segurança', targetMetFilled: 'Dados preenchidos • meta atingida', targetNotMetFilled: 'Dados preenchidos • meta não atingida',
+      weekendHoliday: 'Fim de semana / feriado nacional', openData: 'Abrir dados', latestAction: 'Plano de ação mais recente', noAction: 'Nenhum plano de ação ainda',
+      dailyTitle: 'Lançamento de dados diários', dailyDesc: 'Preencha diretamente na web ou importe uma planilha Excel no mesmo formato.',
+      selectedMonth: 'Período ativo', clearMonth: 'Limpar mês', downloadTemplate: 'Modelo Excel', savedAutomatically: 'As alterações são salvas automaticamente neste navegador.',
+      date: 'Data', remarks: 'Observações / Comentários', holiday: 'Feriado nacional', weekend: 'Fim de semana', today: 'Hoje',
+      targetsTitle: 'Metas e calendário', targetsDesc: 'Defina os limites dos KPIs e os feriados adicionais que serão marcados em azul.',
+      primaryMetric: 'Métrica principal', targetValue: 'Valor da meta', minimum: 'Mínimo', maximum: 'Máximo',
+      directionMin: 'Quanto maior, melhor', directionMax: 'Quanto menor, melhor', saved: 'Salvo',
+      holidayCalendar: 'Calendário de feriados', holidayCalendarDesc: 'Os feriados nacionais e as folgas coletivas de 2026 (Indonésia) já estão incluídos.',
+      addHoliday: 'Adicionar feriado', holidayName: 'Nome do feriado', add: 'Adicionar', builtIn: 'Padrão', custom: 'Personalizado',
+      usageNotes: 'Como usar', note1: 'Selecione o mês no cabeçalho. Cada mês é salvo como um período separado.',
+      note2: 'Preencha a tabela em Dados diários ou importe um Excel. Os percentuais são calculados automaticamente.',
+      note3: 'Clique em Modelo Excel para baixar uma planilha de seis abas pronta para preencher.',
+      note4: 'Os dados ficam salvos localmente. Baixe o Excel de tempos em tempos para manter um backup.',
+      actionsTitle: 'Plano de ação', actionsDesc: 'Acompanhamento entre as áreas, com responsável, prazo e status bem definidos.',
+      newAction: 'Nova ação', edit: 'Editar', delete: 'Excluir', owner: 'Responsável', dueDate: 'Prazo', status: 'Status', title: 'Título da ação', category: 'Categoria',
+      open: 'Aberta', pending: 'Pendente', overdue: 'Atrasada', done: 'Concluída', cancel: 'Cancelar', save: 'Salvar',
+      confirmClearTitle: 'Limpar os dados deste mês?', confirmClearDesc: 'Todos os dados diários de {month} serão removidos. As metas e os planos de ação não serão alterados.',
+      clear: 'Sim, limpar dados', confirmDeleteTitle: 'Excluir plano de ação?', confirmDeleteDesc: 'Esta ação não pode ser desfeita.',
+      importSuccess: 'Importação concluída: {count} valor(es) em {sheets} aba(s).', importError: 'Não foi possível ler o arquivo. Use o formato do modelo do painel.',
+      exportReady: 'Arquivo Excel gerado com sucesso.', pdfReady: 'PDF do painel gerado com sucesso.', pdfWorking: 'Preparando o PDF…',
+      monthCleared: 'Os dados de {month} foram apagados.', holidayAdded: 'Feriado adicionado.', holidayRemoved: 'Feriado removido.',
+      actionSaved: 'Plano de ação salvo.', actionDeleted: 'Plano de ação excluído.', invalidHoliday: 'Informe a data e o nome do feriado.',
+      all: 'Todos', legend: 'Legenda', official2026: 'Calendário oficial de 2026', dataAvailable: 'dias preenchidos',
+      safety: 'Segurança', fiveS: '5S', quality: 'Qualidade', delivery: 'Entrega', cost: 'Custo', people: 'Pessoas',
+      accidents: 'Número de acidentes', compliance5s: 'Conformidade da auditoria 5S', ftp: 'Aprovação na 1ª vez (FTP)', deliveryOutput: 'Desempenho de entrega',
+      extraHours: 'Total de horas adicionais', attendance: 'Presença total', values: 'valores', percent: '%', hours: 'h', cases: 'caso(s)',
+      nearMiss: 'Quase acidente', accident: 'Acidente', assembly: '5S – Área de montagem', testingZone: '5S – Área de testes',
+      warehouse: '5S – Almoxarifado', machining: '5S – Área de usinagem', otherAreas: '5S – Outras áreas',
+      valvesOk: 'Válvulas OK', valvesTested: 'Válvulas testadas', customerComplaints: 'Nº de reclamações de clientes', valvesAffected: 'Válvulas afetadas',
+      plannedTesting: 'Válvulas planejadas para teste', testingOutput: 'Testes realizados %', plannedPainting: 'Válvulas planejadas para jateamento / pintura',
+      valvesPainted: 'Válvulas jateadas / pintadas', paintingOutput: 'Pintura realizada %', permanentEmployees: 'Funcionários efetivos',
+      permanentHours: 'Horas disponíveis – efetivos', contractEmployees: 'Funcionários temporários', contractHours: 'Horas disponíveis – temporários',
+      idleHours: 'Horas ociosas (A)', overtimeHours: 'Horas extras (B)', reworkHours: 'Horas de retrabalho (C)', retestingHours: 'Horas de reteste (D)',
+      totalExtraHours: 'Total de horas adicionais (A+B+C+D)', permanentStrength: 'Total de funcionários efetivos', employeesPresent: 'Efetivos presentes',
+      permanentAttendance: 'Presença dos efetivos %', contractStrength: 'Total de funcionários temporários', contractPresent: 'Temporários presentes',
+      contractAttendance: 'Presença dos temporários %', totalAttendance: 'Presença total %', chooseFile: 'Escolher arquivo Excel',
+      statusData: 'Status dos dados', working: 'Dia útil', nonWorking: 'Dia não útil', record: 'registros', deleteHoliday: 'Excluir feriado',
+      cloudSync: 'Sincronização', cloudShortLive: 'AO VIVO', cloudShortLocal: 'LOCAL', cloudShortSaving: 'SALVANDO…', cloudShortConnecting: 'CONECTANDO…', cloudShortError: 'ERRO',
+      daysUnit: 'dias', pdfError: 'Falha ao exportar o PDF. Use Imprimir → Salvar como PDF no navegador.'
+    },
     id: {
       appName: 'S+QDCP Command Center', dashboard: 'Ringkasan Kinerja', dashboardSub: 'Sistem pemantauan operasional terpadu',
       navigation: 'Navigasi', overview: 'Overview', dailyData: 'Data Harian', targets: 'Target KPI', actionPlan: 'Action Plan',
@@ -55,7 +105,9 @@
       totalExtraHours: 'Total Extra Hours (A+B+C+D)', permanentStrength: 'Total karyawan permanen', employeesPresent: 'Karyawan hadir',
       permanentAttendance: 'Kehadiran permanen %', contractStrength: 'Total karyawan kontrak', contractPresent: 'Karyawan kontrak hadir',
       contractAttendance: 'Kehadiran kontrak %', totalAttendance: 'Total Attendance %', chooseFile: 'Pilih file Excel',
-      statusData: 'Status data', working: 'Hari kerja', nonWorking: 'Hari nonkerja', record: 'rekaman', deleteHoliday: 'Hapus libur'
+      statusData: 'Status data', working: 'Hari kerja', nonWorking: 'Hari nonkerja', record: 'rekaman', deleteHoliday: 'Hapus libur',
+      cloudSync: 'Cloud Sync', cloudShortLive: 'LIVE', cloudShortLocal: 'LOCAL', cloudShortSaving: 'SYNC…', cloudShortConnecting: 'CONNECT…', cloudShortError: 'ERROR',
+      daysUnit: 'tanggal', pdfError: 'PDF export failed. Use browser Print → Save as PDF.'
     },
     en: {
       appName: 'S+QDCP Command Center', dashboard: 'Performance Summary', dashboardSub: 'Integrated operational monitoring system',
@@ -103,8 +155,19 @@
       totalExtraHours: 'Total Extra Hours (A+B+C+D)', permanentStrength: 'Total Permanent Employee Strength', employeesPresent: 'Employees Present',
       permanentAttendance: 'Permanent Attendance %', contractStrength: 'Total Contract Employee Strength', contractPresent: 'Contract Employees Present',
       contractAttendance: 'Contract Attendance %', totalAttendance: 'Total Attendance %', chooseFile: 'Choose Excel file',
-      statusData: 'Data status', working: 'Working day', nonWorking: 'Non-working day', record: 'records', deleteHoliday: 'Delete holiday'
+      statusData: 'Data status', working: 'Working day', nonWorking: 'Non-working day', record: 'records', deleteHoliday: 'Delete holiday',
+      cloudSync: 'Cloud Sync', cloudShortLive: 'LIVE', cloudShortLocal: 'LOCAL', cloudShortSaving: 'SYNC…', cloudShortConnecting: 'CONNECT…', cloudShortError: 'ERROR',
+      daysUnit: 'date', pdfError: 'PDF export failed. Use browser Print → Save as PDF.'
     }
+  };
+
+  // Idiomas da interface. DEFAULT_LANG é o idioma de quem abre o painel pela primeira vez;
+  // a escolha feita nos botões PT/ID/EN fica salva em cada navegador.
+  const DEFAULT_LANG = 'pt';
+  const LANGUAGES = {
+    pt: { htmlLang:'pt-BR', date:'pt-BR', number:'pt-BR', holiday:2, shortDate:{day:'2-digit',month:'2-digit',year:'numeric'} },
+    id: { htmlLang:'id', date:'id-ID', number:'id-ID', holiday:0, shortDate:{day:'numeric',month:'short',year:'numeric'} },
+    en: { htmlLang:'en', date:'en-GB', number:'en-US', holiday:1, shortDate:{day:'numeric',month:'short',year:'numeric'} }
   };
 
   const CONFIG = {
@@ -142,39 +205,40 @@
     people: 'M60 273 L60 35 L139 35 C198 35 225 69 225 119 C225 170 190 194 60 194'
   };
 
+  // Feriados nacionais e folgas coletivas (cuti bersama) da Indonésia em 2026: [indonésio, inglês, português].
   const BUILTIN_HOLIDAYS = {
-    '2026-01-01': ['Tahun Baru 2026 Masehi','New Year’s Day 2026'],
-    '2026-01-16': ['Isra Mikraj Nabi Muhammad SAW','Isra Mi’raj'],
-    '2026-02-16': ['Cuti Bersama Imlek','Chinese New Year Collective Leave'],
-    '2026-02-17': ['Tahun Baru Imlek 2577 Kongzili','Chinese New Year 2577'],
-    '2026-03-18': ['Cuti Bersama Nyepi','Nyepi Collective Leave'],
-    '2026-03-19': ['Hari Suci Nyepi','Nyepi'],
-    '2026-03-20': ['Cuti Bersama Idulfitri','Eid al-Fitr Collective Leave'],
-    '2026-03-21': ['Idulfitri 1447 H','Eid al-Fitr 1447 H'],
-    '2026-03-22': ['Idulfitri 1447 H','Eid al-Fitr 1447 H'],
-    '2026-03-23': ['Cuti Bersama Idulfitri','Eid al-Fitr Collective Leave'],
-    '2026-03-24': ['Cuti Bersama Idulfitri','Eid al-Fitr Collective Leave'],
-    '2026-04-03': ['Wafat Yesus Kristus','Good Friday'],
-    '2026-04-05': ['Kebangkitan Yesus Kristus','Easter Sunday'],
-    '2026-05-01': ['Hari Buruh Internasional','International Labour Day'],
-    '2026-05-14': ['Kenaikan Yesus Kristus','Ascension Day'],
-    '2026-05-15': ['Cuti Bersama Kenaikan Yesus Kristus','Ascension Collective Leave'],
-    '2026-05-27': ['Iduladha 1447 H','Eid al-Adha 1447 H'],
-    '2026-05-28': ['Cuti Bersama Iduladha','Eid al-Adha Collective Leave'],
-    '2026-05-31': ['Hari Raya Waisak 2570 BE','Vesak Day 2570 BE'],
-    '2026-06-01': ['Hari Lahir Pancasila','Pancasila Day'],
-    '2026-06-16': ['Tahun Baru Islam 1448 H','Islamic New Year 1448 H'],
-    '2026-08-17': ['Hari Kemerdekaan Republik Indonesia','Indonesian Independence Day'],
-    '2026-08-25': ['Maulid Nabi Muhammad SAW','Prophet Muhammad’s Birthday'],
-    '2026-12-24': ['Cuti Bersama Natal','Christmas Collective Leave'],
-    '2026-12-25': ['Hari Raya Natal','Christmas Day']
+    '2026-01-01': ['Tahun Baru 2026 Masehi','New Year’s Day 2026','Ano-Novo de 2026'],
+    '2026-01-16': ['Isra Mikraj Nabi Muhammad SAW','Isra Mi’raj','Isra Mikraj (ascensão do Profeta Maomé)'],
+    '2026-02-16': ['Cuti Bersama Imlek','Chinese New Year Collective Leave','Folga coletiva – Ano-Novo Chinês'],
+    '2026-02-17': ['Tahun Baru Imlek 2577 Kongzili','Chinese New Year 2577','Ano-Novo Chinês 2577'],
+    '2026-03-18': ['Cuti Bersama Nyepi','Nyepi Collective Leave','Folga coletiva – Nyepi'],
+    '2026-03-19': ['Hari Suci Nyepi','Nyepi','Nyepi (Dia do Silêncio)'],
+    '2026-03-20': ['Cuti Bersama Idulfitri','Eid al-Fitr Collective Leave','Folga coletiva – Eid al-Fitr'],
+    '2026-03-21': ['Idulfitri 1447 H','Eid al-Fitr 1447 H','Eid al-Fitr 1447 H (fim do Ramadã)'],
+    '2026-03-22': ['Idulfitri 1447 H','Eid al-Fitr 1447 H','Eid al-Fitr 1447 H (fim do Ramadã)'],
+    '2026-03-23': ['Cuti Bersama Idulfitri','Eid al-Fitr Collective Leave','Folga coletiva – Eid al-Fitr'],
+    '2026-03-24': ['Cuti Bersama Idulfitri','Eid al-Fitr Collective Leave','Folga coletiva – Eid al-Fitr'],
+    '2026-04-03': ['Wafat Yesus Kristus','Good Friday','Sexta-feira Santa'],
+    '2026-04-05': ['Kebangkitan Yesus Kristus','Easter Sunday','Domingo de Páscoa'],
+    '2026-05-01': ['Hari Buruh Internasional','International Labour Day','Dia Internacional do Trabalho'],
+    '2026-05-14': ['Kenaikan Yesus Kristus','Ascension Day','Ascensão de Jesus Cristo'],
+    '2026-05-15': ['Cuti Bersama Kenaikan Yesus Kristus','Ascension Collective Leave','Folga coletiva – Ascensão de Jesus Cristo'],
+    '2026-05-27': ['Iduladha 1447 H','Eid al-Adha 1447 H','Eid al-Adha 1447 H (Festa do Sacrifício)'],
+    '2026-05-28': ['Cuti Bersama Iduladha','Eid al-Adha Collective Leave','Folga coletiva – Eid al-Adha'],
+    '2026-05-31': ['Hari Raya Waisak 2570 BE','Vesak Day 2570 BE','Vesak 2570 BE'],
+    '2026-06-01': ['Hari Lahir Pancasila','Pancasila Day','Dia da Pancasila'],
+    '2026-06-16': ['Tahun Baru Islam 1448 H','Islamic New Year 1448 H','Ano-Novo Islâmico 1448 H'],
+    '2026-08-17': ['Hari Kemerdekaan Republik Indonesia','Indonesian Independence Day','Dia da Independência da Indonésia'],
+    '2026-08-25': ['Maulid Nabi Muhammad SAW','Prophet Muhammad’s Birthday','Nascimento do Profeta Maomé (Maulid)'],
+    '2026-12-24': ['Cuti Bersama Natal','Christmas Collective Leave','Folga coletiva – Natal'],
+    '2026-12-25': ['Hari Raya Natal','Christmas Day','Natal']
   };
 
   const $ = (sel, root=document) => root.querySelector(sel);
   const $$ = (sel, root=document) => [...root.querySelectorAll(sel)];
   const esc = (v='') => String(v).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   const tr = (key, vars={}) => {
-    let s = (I18N[state?.language || 'id'] || I18N.id)[key] ?? I18N.id[key] ?? key;
+    let s = (I18N[state?.language || DEFAULT_LANG] || I18N[DEFAULT_LANG])[key] ?? I18N[DEFAULT_LANG][key] ?? key;
     Object.entries(vars).forEach(([k,v]) => s = s.replaceAll(`{${k}}`, v));
     return s;
   };
@@ -182,9 +246,15 @@
   const monthDays = month => { const [y,m] = month.split('-').map(Number); return new Date(y,m,0).getDate(); };
   const dateObj = (month, day) => { const [y,m] = month.split('-').map(Number); return new Date(y,m-1,day); };
   const isoDate = (month, day) => `${month}-${pad(day)}`;
-  const monthLabel = month => new Intl.DateTimeFormat(state.language === 'id' ? 'id-ID':'en-GB',{month:'long',year:'numeric'}).format(dateObj(month,1));
-  const shortDate = (month,day) => new Intl.DateTimeFormat(state.language === 'id' ? 'id-ID':'en-GB',{day:'numeric',month:'short',year:'numeric'}).format(dateObj(month,day));
-  const dayName = (month,day) => new Intl.DateTimeFormat(state.language === 'id' ? 'id-ID':'en-GB',{weekday:'short'}).format(dateObj(month,day));
+  const langCfg = () => LANGUAGES[state.language] || LANGUAGES[DEFAULT_LANG];
+  // Inicial maiúscula: em português o mês viria como 'agosto de 2026'.
+  const capitalize = s => s.charAt(0).toUpperCase()+s.slice(1);
+  const monthLabel = month => capitalize(new Intl.DateTimeFormat(langCfg().date,{month:'long',year:'numeric'}).format(dateObj(month,1)));
+  const shortDate = (month,day) => new Intl.DateTimeFormat(langCfg().date,langCfg().shortDate).format(dateObj(month,day));
+  // Dia da semana abreviado, sem ponto e com inicial maiúscula (em português o padrão seria 'sáb.').
+  const dayName = (month,day) => capitalize(new Intl.DateTimeFormat(langCfg().date,{weekday:'short'}).format(dateObj(month,day)).replace('.',''));
+  // Em português os decimais usam vírgula (92,9); nos outros idiomas o texto fica como era.
+  const localDecimal = text => state.language==='pt' ? String(text).replace('.',',') : String(text);
   const pct = (a,b,zeroAsHundred=false) => b > 0 ? a/b*100 : (zeroAsHundred && a === 0 && b === 0 ? 100 : null);
   const sum = arr => arr.reduce((a,b)=>a+(Number(b)||0),0);
   const hasOwn = (o,k) => Object.prototype.hasOwnProperty.call(o || {},k);
@@ -200,14 +270,15 @@
       check:'<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>', alert:'<path d="M12 3 2.8 20h18.4z"/><path d="M12 9v5M12 17h.01"/>',
       database:'<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/>',
       plus:'<path d="M12 5v14M5 12h14"/>', trash:'<path d="M4 7h16M9 7V4h6v3M7 7l1 14h8l1-14M10 11v6M14 11v6"/>', edit:'<path d="m4 16-1 5 5-1L19 9l-4-4zM13 7l4 4"/>',
-      chevron:'<path d="m9 18 6-6-6-6"/>', info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/>'
+      chevron:'<path d="m9 18 6-6-6-6"/>', info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/>',
+      panel:'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/>', cloud:'<path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>'
     };
-    return `<svg viewBox="0 0 24 24" aria-hidden="true">${paths[name] || paths.info}</svg>`;
+    return `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true">${paths[name] || paths.info}</svg>`;
   };
 
   function createInitialState() {
     const s = {
-      language:'id', theme:'light', month:'2026-08', activeView:'overview', activeCategory:'safety', overviewPeriod:'daily',
+      language:DEFAULT_LANG, theme:'dark', layoutVersion:2, sidebarCollapsed:false, month:'2026-08', activeView:'overview', activeCategory:'safety', overviewPeriod:'daily',
       targets:{ safety:0, '5s':100, quality:95, delivery:95, cost:24, people:95 }, months:{}, customHolidays:{}, actions:[]
     };
     seedDemo(s);
@@ -219,30 +290,30 @@
     s.months[m] = {safety:{},'5s':{},quality:{},delivery:{},cost:{},people:{}};
     const put = (cat, day, rec) => s.months[m][cat][day] = rec;
     [1,3,4,5,6,7].forEach(d => put('5s',d,{assembly:true,testing:true,warehouse:true,machining:true,other:true}));
-    put('safety',1,{nearMiss:0,accident:0}); put('safety',3,{nearMiss:0,accident:1,remarks:'Tangan operator terkena tools saat pengencangan nipple; terjadi abrasi ringan.'});
+    put('safety',1,{nearMiss:0,accident:0}); put('safety',3,{nearMiss:0,accident:1,remarks:'A mão do operador foi atingida pela ferramenta durante o aperto do niple; houve abrasão leve.'});
     [4,5,6,7].forEach(d=>put('safety',d,{nearMiss:0,accident:0}));
     put('quality',1,{valvesOk:39,valvesTested:42,complaints:0,valvesAffected:0});
-    put('quality',3,{valvesOk:17,valvesTested:17,complaints:0,valvesAffected:0,remarks:'Witness Inspection SO.002 (Denson), SO.012 & 013 (Atamora)'});
+    put('quality',3,{valvesOk:17,valvesTested:17,complaints:0,valvesAffected:0,remarks:'Inspeção testemunhada SO.002 (Denson), SO.012 e 013 (Atamora)'});
     put('quality',4,{valvesOk:0,valvesTested:0,complaints:0,valvesAffected:0}); put('quality',5,{valvesOk:0,valvesTested:0,complaints:0,valvesAffected:0});
-    put('quality',6,{valvesOk:6,valvesTested:6,complaints:0,valvesAffected:0,remarks:'Re-testing after Repair SO.004'});
-    put('quality',7,{valvesOk:6,valvesTested:6,complaints:0,valvesAffected:0,remarks:'Witness Inspection SO.014 (BSM)'});
+    put('quality',6,{valvesOk:6,valvesTested:6,complaints:0,valvesAffected:0,remarks:'Reteste após o reparo SO.004'});
+    put('quality',7,{valvesOk:6,valvesTested:6,complaints:0,valvesAffected:0,remarks:'Inspeção testemunhada SO.014 (BSM)'});
     put('delivery',1,{plannedTesting:42,valvesTested:39,plannedPainting:15,valvesPainted:15});
     [[3,17,17,15,15],[4,23,23,15,15],[5,0,0,7,7],[6,0,0,2,2],[7,4,4,3,3]].forEach(r=>put('delivery',r[0],{plannedTesting:r[1],valvesTested:r[2],plannedPainting:r[3],valvesPainted:r[4]}));
     put('cost',1,{permanentEmployees:6,permanentHours:48,contractEmployees:9,contractHours:72,idleHours:0,overtimeHours:120,reworkHours:24,retestingHours:0,remarks:''});
-    put('cost',3,{permanentEmployees:7,permanentHours:56,contractEmployees:11,contractHours:88,idleHours:0,overtimeHours:0,reworkHours:12,retestingHours:0,remarks:'Repair Leak Gate SO.004'});
-    put('cost',4,{permanentEmployees:7,permanentHours:56,contractEmployees:12,contractHours:96,idleHours:0,overtimeHours:0,reworkHours:12,retestingHours:0,remarks:'Repair Leak Gate SO.004'});
-    put('cost',5,{permanentEmployees:7,permanentHours:56,contractEmployees:12,contractHours:96,idleHours:0,overtimeHours:0,reworkHours:12,retestingHours:0,remarks:'Repair Leak Gate SO.004'});
-    put('cost',6,{permanentEmployees:7,permanentHours:56,contractEmployees:11,contractHours:88,idleHours:0,overtimeHours:0,reworkHours:0,retestingHours:8,remarks:'Re-Testing SO.004'});
-    put('cost',7,{permanentEmployees:7,permanentHours:56,contractEmployees:12,contractHours:96,idleHours:0,overtimeHours:0,reworkHours:24,retestingHours:0,remarks:'Final Touchup Painting'});
+    put('cost',3,{permanentEmployees:7,permanentHours:56,contractEmployees:11,contractHours:88,idleHours:0,overtimeHours:0,reworkHours:12,retestingHours:0,remarks:'Reparo de vazamento na válvula gaveta SO.004'});
+    put('cost',4,{permanentEmployees:7,permanentHours:56,contractEmployees:12,contractHours:96,idleHours:0,overtimeHours:0,reworkHours:12,retestingHours:0,remarks:'Reparo de vazamento na válvula gaveta SO.004'});
+    put('cost',5,{permanentEmployees:7,permanentHours:56,contractEmployees:12,contractHours:96,idleHours:0,overtimeHours:0,reworkHours:12,retestingHours:0,remarks:'Reparo de vazamento na válvula gaveta SO.004'});
+    put('cost',6,{permanentEmployees:7,permanentHours:56,contractEmployees:11,contractHours:88,idleHours:0,overtimeHours:0,reworkHours:0,retestingHours:8,remarks:'Reteste SO.004'});
+    put('cost',7,{permanentEmployees:7,permanentHours:56,contractEmployees:12,contractHours:96,idleHours:0,overtimeHours:0,reworkHours:24,retestingHours:0,remarks:'Retoque final de pintura'});
     put('people',1,{permanentStrength:7,permanentPresent:6,contractStrength:12,contractPresent:9});
     [[3,7,7,12,11],[4,7,7,12,12],[5,7,7,12,12],[6,7,7,12,11],[7,7,7,12,12]].forEach(r=>put('people',r[0],{permanentStrength:r[1],permanentPresent:r[2],contractStrength:r[3],contractPresent:r[4]}));
     s.actions = [
-      {id:'a1',category:'safety',title:'Investigasi insiden abrasi & refresh briefing',owner:'HSE',dueDate:'2026-08-05',status:'open'},
-      {id:'a2',category:'5s',title:'Audit silang area testing dan machining',owner:'GA Team',dueDate:'2026-08-14',status:'pending'},
-      {id:'a3',category:'quality',title:'Review first time pass SO.002',owner:'QC Team',dueDate:'2026-08-12',status:'open'},
-      {id:'a4',category:'delivery',title:'Recovery plan backlog testing',owner:'Production',dueDate:'2026-08-18',status:'open'},
-      {id:'a5',category:'cost',title:'Analisis overtime dan rework',owner:'Operations',dueDate:'2026-08-10',status:'pending'},
-      {id:'a6',category:'people',title:'Follow-up kehadiran tenaga kontrak',owner:'HRGA',dueDate:'2026-08-20',status:'open'}
+      {id:'a1',category:'safety',title:'Investigação do incidente de abrasão e reforço do briefing',owner:'SSMA',dueDate:'2026-08-05',status:'open'},
+      {id:'a2',category:'5s',title:'Auditoria cruzada das áreas de testes e usinagem',owner:'Serviços Gerais',dueDate:'2026-08-14',status:'pending'},
+      {id:'a3',category:'quality',title:'Revisão da aprovação na 1ª vez (FTP) da SO.002',owner:'Equipe de CQ',dueDate:'2026-08-12',status:'open'},
+      {id:'a4',category:'delivery',title:'Plano de recuperação do backlog de testes',owner:'Produção',dueDate:'2026-08-18',status:'open'},
+      {id:'a5',category:'cost',title:'Análise de horas extras e retrabalho',owner:'Operações',dueDate:'2026-08-10',status:'pending'},
+      {id:'a6',category:'people',title:'Acompanhamento da presença dos temporários',owner:'RH',dueDate:'2026-08-20',status:'open'}
     ];
   }
 
@@ -251,7 +322,11 @@
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return createInitialState();
       const saved = JSON.parse(raw), base = createInitialState();
-      return {...base,...saved,targets:{...base.targets,...saved.targets},months:saved.months||base.months,actions:saved.actions||base.actions,customHolidays:saved.customHolidays||{}};
+      const merged = {...base,...saved,targets:{...base.targets,...saved.targets},months:saved.months||base.months,actions:saved.actions||base.actions,customHolidays:saved.customHolidays||{}};
+      // Layout novo (versão 2): o tema escuro passou a ser o padrão. A troca acontece uma única vez
+      // para quem já usava o painel; depois disso vale o tema que a pessoa escolher.
+      if (saved.layoutVersion !== 2) { merged.theme = 'dark'; merged.layoutVersion = 2; }
+      return merged;
     } catch { return createInitialState(); }
   }
   let state = loadState();
@@ -275,11 +350,14 @@
   function cloudStatusText() {
     return tr(cloud.status==='live'?'cloudLive':cloud.status==='connecting'?'cloudConnecting':cloud.status==='saving'?'cloudSaving':cloud.status==='error'?'cloudError':'cloudLocal');
   }
+  function cloudShortText() {
+    return tr(cloud.status==='live'?'cloudShortLive':cloud.status==='local'?'cloudShortLocal':cloud.status==='saving'?'cloudShortSaving':cloud.status==='connecting'?'cloudShortConnecting':'cloudShortError');
+  }
   function cloudStatusClass() { return `cloud-${cloud.status}`; }
   function setCloudStatus(status) {
     cloud.status=status;
     $$('[data-cloud-status]').forEach(el=>{el.textContent=cloudStatusText();el.className=`live-pill ${cloudStatusClass()} no-export`;});
-    $$('[data-cloud-short]').forEach(el=>el.textContent=status==='live'?'LIVE':status==='local'?'LOCAL':status==='saving'?'SYNC…':status==='connecting'?'CONNECT…':'ERROR');
+    $$('[data-cloud-short]').forEach(el=>el.textContent=cloudShortText());
     $$('.cloud-status-dot').forEach(el=>el.className=`status-dot cloud-status-dot ${cloudStatusClass()}`);
   }
   function scheduleCloudSave(json) {
@@ -335,7 +413,7 @@
   function holidayInfo(month, day) {
     const iso = isoDate(month,day), d = dateObj(month,day), weekend = d.getDay()===0 || d.getDay()===6;
     const built = BUILTIN_HOLIDAYS[iso], custom = state.customHolidays[iso];
-    return { weekend, holiday:!!(built||custom), name: custom || (built ? built[state.language==='id'?0:1] : ''), nonwork:weekend||!!built||!!custom, builtIn:!!built };
+    return { weekend, holiday:!!(built||custom), name: custom || (built ? built[langCfg().holiday] : ''), nonwork:weekend||!!built||!!custom, builtIn:!!built };
   }
   function recordHasData(cat, rec) {
     if (!rec) return false;
@@ -379,7 +457,7 @@
     return !!rec && ((Number(rec.nearMiss)||0) > 0 || (Number(rec.accident)||0) > 0);
   }
   function contourStatus(cat, rec, info) {
-    // Priority: Safety incident > weekend/holiday > achieved > not achieved > empty.
+    // Prioridade: ocorrência de segurança > fim de semana/feriado > meta atingida > meta não atingida > sem dados.
     if (cat==='safety' && hasSafetyIncident(rec)) return 'incident';
     if (info.nonwork) return 'off';
     if (!recordHasData(cat,rec)) return 'blank';
@@ -406,43 +484,62 @@
   function formatValue(cat,value,compact=false) {
     if (value===null || value===undefined || Number.isNaN(value)) return '—';
     const unit=CONFIG[cat].unit;
-    const n = unit==='percent' ? `${Math.round(value)}%` : Number.isInteger(value) ? value.toLocaleString(state.language==='id'?'id-ID':'en-US') : value.toFixed(1);
+    const n = unit==='percent' ? `${Math.round(value)}%` : Number.isInteger(value) ? value.toLocaleString(langCfg().number) : localDecimal(value.toFixed(1));
     if (compact || unit==='percent') return String(n);
     return `${n} ${tr(unit)}`;
   }
   function statusLabel(st) { return tr(st==='blank'?'noData':st); }
   function actionStatus(a) { return a.status!=='done' && a.dueDate && a.dueDate<TODAY ? 'overdue' : a.status; }
+  // Código curto da categoria (S, 5S, Q, D, C, P) e a posição dela (01 a 06), usados nos rótulos do layout.
+  const catCode = cat => cat==='5s' ? '5S' : CONFIG[cat].letter;
+  const catNo = cat => pad(CATEGORIES.indexOf(cat)+1);
 
   function renderShell() {
     document.documentElement.dataset.theme = state.theme;
-    document.documentElement.lang = state.language;
+    document.documentElement.lang = langCfg().htmlLang;
     document.title = `${tr('appName')} — PT. ALFA VALVES INDONESIA`;
     const nav = [
       ['overview','overview','overview'],['daily','data','dailyData'],['targets','target','targets'],['actions','actions','actionPlan']
     ];
-    $('#app').innerHTML = `<div class="app-shell">
-      <aside class="sidebar" id="sidebar">
-        <div class="brand"><div class="brand-mark">AV</div><div class="brand-name">PT. ALFA VALVES<br>INDONESIA<small>S+QDCP Command Center</small></div></div>
-        <div class="nav-label">${tr('navigation')}</div>
-        <ul class="nav-list">${nav.map(n=>`<li><button class="nav-btn ${state.activeView===n[0]?'active':''}" data-action="navigate" data-view="${n[0]}">${icon(n[1])}<span class="nav-text">${tr(n[2])}</span></button></li>`).join('')}</ul>
-        <div class="sidebar-status"><div class="sidebar-status-title">${tr('systemStatus')}</div><div class="status-mini"><span><i class="status-dot cloud-status-dot ${cloudStatusClass()}"></i>Cloud Sync</span><strong data-cloud-short>${cloud.status==='live'?'LIVE':cloud.status==='local'?'LOCAL':cloud.status.toUpperCase()}</strong></div><div class="status-mini"><span>${monthLabel(state.month)}</span><strong>${filledDays()} ${tr('record')}</strong></div></div>
-        <div class="sidebar-footer">${tr('version')}<br>© 2026 PT. ALFA VALVES INDONESIA</div>
+    const viewNo = pad(Math.max(0,nav.findIndex(n=>n[0]===state.activeView))+1);
+    $('#app').innerHTML = `<div class="app-shell ${state.sidebarCollapsed?'is-collapsed':''}">
+      <div class="sidebar-backdrop" id="sidebarBackdrop" data-action="toggle-menu"></div>
+      <aside class="sidebar ${state.sidebarCollapsed?'collapsed':''}" id="sidebar">
+        <div class="sidebar-top">
+          <div class="brand"><div class="brand-mark">AV</div><div class="brand-name">PT. ALFA VALVES<br>INDONESIA<small>S+QDCP Command Center</small></div></div>
+          <button class="collapse-btn" data-action="collapse" title="${tr('navigation')}" aria-label="${tr('navigation')}">${icon('panel')}</button>
+        </div>
+        <nav class="sidebar-nav" aria-label="${tr('navigation')}">
+          <div class="nav-label">${tr('navigation')}</div>
+          <ul class="nav-list">${nav.map((n,i)=>`<li><button class="nav-btn ${state.activeView===n[0]?'active':''}" data-action="navigate" data-view="${n[0]}" title="${tr(n[2])}"><span class="nav-icon">${icon(n[1])}</span><span class="nav-text">${tr(n[2])}</span><span class="nav-index">${pad(i+1)}</span></button></li>`).join('')}</ul>
+        </nav>
+        <div class="sidebar-footer">
+          <div class="quick-actions">
+            <div class="lang-toggle">${Object.keys(LANGUAGES).map(l=>`<button data-action="language" data-lang="${l}" class="quick-btn ${state.language===l?'active':''}">${l.toUpperCase()}</button>`).join('')}</div>
+            <button class="quick-btn" data-action="theme" title="${tr('theme')}" aria-label="${tr('theme')}">${icon(state.theme==='dark'?'sun':'moon')}</button>
+          </div>
+          <button class="sidebar-status" data-action="cloud-info" title="${tr('systemStatus')}">
+            <span class="status-avatar">${icon('cloud')}</span>
+            <span class="status-info"><span class="status-mini"><span>${tr('cloudSync')}</span><strong data-cloud-short>${cloudShortText()}</strong></span><span class="status-mini status-sub"><span>${monthLabel(state.month)}</span><strong>${filledDays()} ${tr('record')}</strong></span></span>
+            <i class="status-dot cloud-status-dot ${cloudStatusClass()}"></i>
+          </button>
+          <div class="sidebar-caption">${tr('version')}<br>© 2026 PT. ALFA VALVES INDONESIA</div>
+        </div>
       </aside>
       <main class="main-shell">
         <header class="topbar no-export">
-          <button class="icon-btn mobile-menu" data-action="toggle-menu" title="${tr('menu')}">${icon('menu')}</button>
-          <div class="page-heading"><h1>${viewTitle()}</h1><p>${tr('dashboardSub')}</p></div>
+          <div class="topbar-left">
+            <button class="icon-btn mobile-menu" data-action="toggle-menu" title="${tr('menu')}" aria-label="${tr('menu')}">${icon('menu')}</button>
+            <div class="page-heading"><p>S+QDCP / ${viewNo} · ${tr('dashboardSub')}</p><h1>${viewTitle()}</h1></div>
+          </div>
           <div class="toolbar">
             <label class="control month-control" title="${tr('selectedMonth')}">${icon('calendar')}<span>${tr('selectedMonth')}</span><input id="monthPicker" type="month" value="${state.month}" min="2024-01" max="2035-12"></label>
-            <div class="lang-toggle"><button data-action="language" data-lang="id" class="${state.language==='id'?'active':''}">ID</button><button data-action="language" data-lang="en" class="${state.language==='en'?'active':''}">EN</button></div>
-            <button class="icon-btn" data-action="theme" title="${tr('theme')}">${icon(state.theme==='dark'?'sun':'moon')}</button>
             <button class="btn hide-medium" data-action="import" title="${tr('importExcel')}">${icon('upload')}<span>${tr('importExcel')}</span></button>
             <button class="btn btn-primary" data-action="pdf" title="${tr('pdf')}">${icon('pdf')}<span>${tr('pdf')}</span></button>
           </div>
         </header>
         <div class="page-content" id="pageContent">${renderView()}</div>
       </main>
-      <nav class="mobile-nav">${nav.map(n=>`<button class="${state.activeView===n[0]?'active':''}" data-action="navigate" data-view="${n[0]}">${icon(n[1])}<span>${tr(n[2])}</span></button>`).join('')}</nav>
     </div>`;
     if (state.activeView==='overview') requestAnimationFrame(hydrateLetterNodes);
   }
@@ -460,32 +557,39 @@
       CATEGORIES.forEach(c=>{const rec=ensureMonth()[c][d];if(!recordHasData(c,rec))return;total++;const s=contourStatus(c,rec,info);if(s==='met')met++;if(s==='warning'||s==='incident')risk++;});
     }
     const completeness = working ? Math.round(total/(working*CATEGORIES.length)*100) : 0;
-    return {working,met,risk,completeness};
+    return {working,met,risk,completeness,total,days};
   }
   function renderOverview() {
-    const stats=summaryStats();
+    const stats=summaryStats(), slots=stats.working*CATEGORIES.length;
     return `<section id="overviewCapture">
-      <div class="dashboard-intro"><div><div class="kpi-eyebrow" style="color:var(--teal)">PT. ALFA VALVES INDONESIA</div><h2>${tr('monthlyOverview')}</h2><p>${tr('monthlyDesc')} <strong>${monthLabel(state.month)}</strong></p></div><button class="live-pill ${cloudStatusClass()} no-export" data-action="cloud-info" data-cloud-status>${cloudStatusText()}</button></div>
-      <div class="summary-grid">
-        ${summaryCard('calendar',stats.working,tr('workingDays'))}${summaryCard('check',stats.met,tr('kpiMet'))}${summaryCard('alert',stats.risk,tr('atRisk'))}${summaryCard('database',`${stats.completeness}%`,tr('completeness'))}
+      <div class="hero">
+        <div class="dashboard-intro"><div><div class="code-tag">PT. ALFA VALVES INDONESIA</div><h2>${tr('monthlyOverview')}</h2><p>${tr('monthlyDesc')} <strong>${monthLabel(state.month)}</strong></p></div><button class="live-pill ${cloudStatusClass()} no-export" data-action="cloud-info" data-cloud-status>${cloudStatusText()}</button></div>
+        <div class="summary-grid">
+          ${summaryCard('calendar',stats.working,tr('workingDays'),stats.working,stats.days,'accent')}${summaryCard('check',stats.met,tr('kpiMet'),stats.met,stats.total,'good')}${summaryCard('alert',stats.risk,tr('atRisk'),stats.risk,stats.total,'bad')}${summaryCard('database',`${stats.completeness}%`,tr('completeness'),stats.total,slots,'warn')}
+        </div>
       </div>
       <div class="overview-toolbar"><div><h3 class="section-title">${tr('performanceContour')}</h3><div class="section-subtitle">${tr('contourDesc')}</div></div><div class="segmented no-export"><button data-action="period" data-period="daily" class="${state.overviewPeriod==='daily'?'active':''}">${tr('daily')}</button><button data-action="period" data-period="weekly" class="${state.overviewPeriod==='weekly'?'active':''}">${tr('weekly')}</button></div></div>
-      <div class="kpi-grid">${CATEGORIES.map(renderKpiCard).join('')}</div>
+      <div class="kpi-grid">${CATEGORIES.map(c=>renderKpiCard(c)).join('')}</div>
       <div class="legend"><strong>${tr('legend')}:</strong><span class="l-incident">${tr('safetyIncident')}</span><span class="l-off">${tr('weekendHoliday')}</span><span class="l-met">${tr('targetMetFilled')}</span><span class="l-warning">${tr('targetNotMetFilled')}</span><span class="l-empty">${tr('noData')}</span></div>
     </section>`;
   }
-  function summaryCard(ic,value,label){return `<div class="summary-card"><div class="summary-icon">${icon(ic)}</div><div><span class="summary-value">${value}</span><span class="summary-label">${label}</span></div></div>`;}
+  // Cartão de resumo: rótulo, número, a conta por trás dele (parte / total) e uma barra com essa proporção.
+  function summaryCard(ic,value,label,part,whole,tone){
+    const ratio=whole>0?Math.min(100,Math.max(0,part/whole*100)):0;
+    return `<div class="summary-card tone-${tone}"><div class="summary-top"><span class="summary-label">${label}</span><span class="summary-icon">${icon(ic)}</span></div><span class="summary-value">${value}</span><span class="summary-sub">${part} / ${whole}</span><div class="summary-bar"><i style="width:${ratio.toFixed(1)}%"></i></div></div>`;
+  }
   function renderKpiCard(cat) {
     const cfg=CONFIG[cat], actual=aggregateMetric(cat), st=statusFor(cat,actual), target=formatValue(cat,Number(state.targets[cat]),true), action=state.actions.filter(a=>a.category===cat).sort((a,b)=>(a.dueDate||'').localeCompare(b.dueDate||''))[0];
     const filled=Object.values(ensureMonth()[cat]).filter(r=>recordHasData(cat,r)).length;
-    return `<article class="kpi-card kpi-${cat}">
-      <div class="kpi-visual"><div class="kpi-head"><div><div class="kpi-eyebrow">${tr('statusData')} • ${filled} ${tr('dataAvailable')}</div><h3 class="kpi-title">${tr(cfg.name)}</h3></div><div class="kpi-score"><strong>${formatValue(cat,actual,true)}</strong><span>${tr('monthlyActual')}</span></div></div>
+    return `<article class="kpi-card kpi-${cat} is-${st}">
+      <div class="kpi-head"><span class="kpi-letter">${catCode(cat)}</span><div class="kpi-headline"><div class="kpi-code">KPI / ${catNo(cat)}</div><h3 class="kpi-title">${tr(cfg.name)}</h3><div class="metric-name">${tr(cfg.metric)}</div></div><div class="kpi-score"><strong>${formatValue(cat,actual,true)}</strong><span>${tr('monthlyActual')}</span></div></div>
+      <div class="kpi-visual">
         <svg class="letter-svg" data-category="${cat}" viewBox="0 0 270 300" role="img" aria-label="${esc(tr(cfg.name))} ${esc(monthLabel(state.month))}"><path class="letter-guide" d="${LETTER_PATHS[cat]}"></path><g class="date-nodes"></g></svg>
       </div>
-      <div class="kpi-body"><div class="metric-row"><div><div class="metric-name">${tr(cfg.metric)}</div><div class="metric-target">${tr('target')} ${cfg.direction==='min'?'≥':'≤'} ${target}</div></div><span class="metric-status status-${st}">${statusLabel(st)}</span></div>
-        <div class="spark-wrap">${sparkline(cat)}</div>
-        <div class="action-preview"><div class="action-preview-title"><small>${tr('latestAction')}</small><strong>${action?esc(action.title):tr('noAction')}</strong></div>${action?`<span class="action-badge action-${actionStatus(action)}">${tr(actionStatus(action))}</span>`:`<button class="mini-btn no-export" data-action="new-action" data-category="${cat}" title="${tr('newAction')}">${icon('plus')}</button>`}</div>
-      </div></article>`;
+      <div class="kpi-facts"><div class="kpi-fact"><strong>${cfg.direction==='min'?'≥':'≤'} ${target}</strong><span>${tr('target')}</span></div><div class="kpi-fact" title="${tr('statusData')}"><strong>${filled}</strong><span>${tr('dataAvailable')}</span></div><span class="metric-status status-${st}">${statusLabel(st)}</span></div>
+      <div class="spark-wrap">${sparkline(cat)}</div>
+      <div class="action-preview"><div class="action-preview-title"><small>${tr('latestAction')}</small><strong>${action?esc(action.title):tr('noAction')}</strong></div>${action?`<span class="action-badge action-${actionStatus(action)}">${tr(actionStatus(action))}</span>`:`<button class="mini-btn no-export" data-action="new-action" data-category="${cat}" title="${tr('newAction')}">${icon('plus')}</button>`}</div>
+    </article>`;
   }
   function sparkline(cat) {
     let values=[]; const days=monthDays(state.month);
@@ -517,7 +621,7 @@
     const cat=state.activeCategory,cfg=CONFIG[cat],days=monthDays(state.month);
     return `<section><div class="page-section-head"><div><h2>${tr('dailyTitle')}</h2><p>${tr('dailyDesc')}</p></div><button class="btn btn-primary" data-action="import">${icon('upload')} ${tr('importExcel')}</button></div>
       <div class="category-tabs">${CATEGORIES.map(c=>`<button class="category-tab ${c===cat?'active':''}" data-action="category" data-category="${c}">${tr(CONFIG[c].name)}</button>`).join('')}</div>
-      <div class="panel" style="margin-top:12px"><div class="data-toolbar"><div class="left"><strong>${tr(cfg.name)}</strong><span class="table-footnote">${monthLabel(state.month)} • ${days} ${tr('date').toLowerCase()}</span></div><div class="right"><button class="btn btn-soft" data-action="template">${icon('download')} ${tr('downloadTemplate')}</button><button class="btn" data-action="export-excel">${icon('download')} ${tr('exportExcel')}</button><button class="btn btn-danger" data-action="clear-month">${icon('trash')} ${tr('clearMonth')}</button></div></div>
+      <div class="panel"><div class="data-toolbar"><div class="left"><span class="kpi-letter">${catCode(cat)}</span><strong>${tr(cfg.name)}</strong><span class="table-footnote">${monthLabel(state.month)} • ${days} ${tr('daysUnit')}</span></div><div class="right"><button class="btn btn-soft" data-action="template">${icon('download')} ${tr('downloadTemplate')}</button><button class="btn" data-action="export-excel">${icon('download')} ${tr('exportExcel')}</button><button class="btn btn-danger" data-action="clear-month">${icon('trash')} ${tr('clearMonth')}</button></div></div>
         <div class="table-wrap" id="dataTableWrap"><table class="data-table"><thead><tr><th>${tr('date')}</th>${cfg.columns.map(c=>`<th>${tr(c.label)}</th>`).join('')}</tr></thead><tbody>${Array.from({length:days},(_,i)=>renderDataRow(cat,i+1)).join('')}</tbody></table></div>
       </div><p class="table-footnote">${tr('savedAutomatically')}</p></section>`;
   }
@@ -528,7 +632,7 @@
   function renderCell(cat,day,col,rec) {
     if(col.type==='computed'){
       const v=computed(cat,col.key,rec),targetField=['ftp','testingOutput','paintingOutput','totalExtraHours','totalAttendance'].includes(col.key),rawStatus=targetField?statusFor(cat,v):'blank',st=rawStatus==='met'?'met':rawStatus==='blank'?'blank':'warning';
-      return `<td class="computed-cell ${v===null?'':st}" data-computed-field="${col.key}">${v===null?'—':`${Math.round(v*10)/10}${col.key==='totalExtraHours'?'':'%'}`}</td>`;
+      return `<td class="computed-cell ${v===null?'':st}" data-computed-field="${col.key}">${v===null?'—':`${localDecimal(Math.round(v*10)/10)}${col.key==='totalExtraHours'?'':'%'}`}</td>`;
     }
     if(col.type==='boolean') return `<td><input class="cell-check" type="checkbox" data-field="${col.key}" data-day="${day}" data-category="${cat}" ${rec[col.key]===true||rec[col.key]===1?'checked':''} aria-label="${esc(tr(col.label))}"></td>`;
     const value=rec[col.key]??'';
@@ -541,17 +645,17 @@
     CONFIG[cat].columns.filter(c=>c.type==='computed').forEach(col=>{
       const cell=$(`[data-computed-field="${col.key}"]`,row);if(!cell)return;const v=computed(cat,col.key,rec);
       const targetField=['ftp','testingOutput','paintingOutput','totalExtraHours','totalAttendance'].includes(col.key),rawStatus=targetField?statusFor(cat,v):'blank',st=rawStatus==='met'?'met':rawStatus==='blank'?'blank':'warning';
-      cell.className=`computed-cell ${v===null?'':st}`;cell.textContent=v===null?'—':`${Math.round(v*10)/10}${col.key==='totalExtraHours'?'':'%'}`;
+      cell.className=`computed-cell ${v===null?'':st}`;cell.textContent=v===null?'—':`${localDecimal(Math.round(v*10)/10)}${col.key==='totalExtraHours'?'':'%'}`;
     });
   }
 
   function renderTargets() {
     const year=state.month.slice(0,4), holidays=Object.keys({...BUILTIN_HOLIDAYS,...state.customHolidays}).filter(d=>d.startsWith(year)).sort();
     return `<section><div class="page-section-head"><div><h2>${tr('targetsTitle')}</h2><p>${tr('targetsDesc')}</p></div><span class="live-pill">${tr('saved')}</span></div>
-      <div class="target-grid">${CATEGORIES.map(c=>{const cfg=CONFIG[c];return `<article class="panel target-card"><div class="target-card-head"><div class="target-card-title"><span class="target-accent" style="background:${cfg.accent}"></span><div><h3>${tr(cfg.name)}</h3><small>${tr(cfg.metric)}</small></div></div><span class="metric-status status-${statusFor(c,aggregateMetric(c))}">${formatValue(c,aggregateMetric(c),true)}</span></div><div class="target-form"><div class="field"><label>${tr('primaryMetric')}</label><input value="${esc(tr(cfg.metric))}" disabled></div><div class="field"><label>${tr('targetValue')}</label><input type="number" step="any" data-target-category="${c}" value="${state.targets[c]}"></div></div><div class="direction-label">${cfg.direction==='min'?'↑ '+tr('directionMin'):'↓ '+tr('directionMax')}</div></article>`;}).join('')}</div>
-      <div class="settings-grid"><article class="panel holiday-panel"><div class="panel-title-row"><div><h3>${tr('holidayCalendar')} • ${year}</h3><div class="section-subtitle">${tr('holidayCalendarDesc')}</div></div><span class="metric-status status-risk">${holidays.length}</span></div>
+      <div class="target-grid">${CATEGORIES.map(c=>{const cfg=CONFIG[c];return `<article class="panel target-card"><div class="target-card-head"><div class="target-card-title"><span class="kpi-letter">${catCode(c)}</span><div><h3>${tr(cfg.name)}</h3><small>${tr(cfg.metric)}</small></div></div><span class="metric-status status-${statusFor(c,aggregateMetric(c))}">${formatValue(c,aggregateMetric(c),true)}</span></div><div class="target-form"><div class="field"><label>${tr('primaryMetric')}</label><input value="${esc(tr(cfg.metric))}" disabled></div><div class="field"><label>${tr('targetValue')}</label><input type="number" step="any" data-target-category="${c}" value="${state.targets[c]}"></div></div><div class="direction-label">${cfg.direction==='min'?'↑ '+tr('directionMin'):'↓ '+tr('directionMax')}</div></article>`;}).join('')}</div>
+      <div class="settings-grid"><article class="panel holiday-panel"><div class="panel-title-row"><div><h3>${tr('holidayCalendar')} • ${year}</h3><div class="section-subtitle">${tr('holidayCalendarDesc')}</div></div><span class="metric-status status-count">${holidays.length}</span></div>
         <form class="holiday-add" id="holidayForm"><div class="field"><input type="date" name="date" min="${year}-01-01" max="${year}-12-31" aria-label="${tr('date')}"></div><div class="field"><input name="name" placeholder="${tr('holidayName')}" aria-label="${tr('holidayName')}"></div><button class="btn btn-soft" type="submit">${icon('plus')} ${tr('add')}</button></form>
-        <div class="holiday-list">${holidays.map(d=>{const built=BUILTIN_HOLIDAYS[d],name=state.customHolidays[d]||(built?built[state.language==='id'?0:1]:'');return `<div class="holiday-item"><time>${shortDate(d.slice(0,7),Number(d.slice(8)))}</time><span title="${esc(name)}">${esc(name)} <small>• ${built?tr('builtIn'):tr('custom')}</small></span>${built?'<i></i>':`<button class="holiday-remove" data-action="remove-holiday" data-date="${d}" title="${tr('deleteHoliday')}">×</button>`}</div>`;}).join('')}</div>
+        <div class="holiday-list">${holidays.map(d=>{const built=BUILTIN_HOLIDAYS[d],name=state.customHolidays[d]||(built?built[langCfg().holiday]:'');return `<div class="holiday-item"><time>${shortDate(d.slice(0,7),Number(d.slice(8)))}</time><span title="${esc(name)}">${esc(name)} <small>• ${built?tr('builtIn'):tr('custom')}</small></span>${built?'<i></i>':`<button class="holiday-remove" data-action="remove-holiday" data-date="${d}" title="${tr('deleteHoliday')}">×</button>`}</div>`;}).join('')}</div>
       </article><article class="panel info-panel"><div class="panel-title-row"><h3>${tr('usageNotes')}</h3></div><ul class="info-list">${[1,2,3,4].map(i=>`<li><span class="info-number">${i}</span><span>${tr('note'+i)}</span></li>`).join('')}</ul><div style="margin-top:18px"><button class="btn btn-primary" data-action="template">${icon('download')} ${tr('downloadTemplate')}</button></div></article></div>
     </section>`;
   }
@@ -561,7 +665,7 @@
   }
   function renderActionGroup(cat) {
     const items=state.actions.filter(a=>a.category===cat), cfg=CONFIG[cat], counts={open:0,pending:0,overdue:0,done:0};items.forEach(a=>counts[actionStatus(a)]++);
-    return `<article class="panel action-group"><div class="action-group-head"><div class="action-group-name"><span style="background:${cfg.accent}"></span><h3>${tr(cfg.name)}</h3></div><div class="count-pills"><span class="count-pill status-met">${counts.done}</span><span class="count-pill status-warning">${counts.pending}</span><span class="count-pill status-risk">${counts.overdue}</span></div></div><div class="action-list">${items.length?items.map(a=>`<div class="action-item"><div><h4>${esc(a.title)}</h4><div class="action-meta"><span>${tr('owner')}: <b>${esc(a.owner||'—')}</b></span><span>${tr('dueDate')}: <b>${a.dueDate||'—'}</b></span><span class="action-badge action-${actionStatus(a)}">${tr(actionStatus(a))}</span></div></div><div class="action-controls"><button class="mini-btn" data-action="edit-action" data-id="${a.id}" title="${tr('edit')}">${icon('edit')}</button><button class="mini-btn" data-action="delete-action" data-id="${a.id}" title="${tr('delete')}">${icon('trash')}</button></div></div>`).join(''):`<div class="empty-state"><div class="empty-state-icon">+</div>${tr('noAction')}</div>`}</div></article>`;
+    return `<article class="panel action-group"><div class="action-group-head"><div class="action-group-name"><span class="kpi-letter">${catCode(cat)}</span><h3>${tr(cfg.name)}</h3></div><div class="count-pills"><span class="count-pill status-met" title="${tr('done')}">${counts.done}</span><span class="count-pill status-warning" title="${tr('pending')}">${counts.pending}</span><span class="count-pill status-risk" title="${tr('overdue')}">${counts.overdue}</span></div></div><div class="action-list">${items.length?items.map(a=>`<div class="action-item"><div><h4>${esc(a.title)}</h4><div class="action-meta"><span>${tr('owner')}: <b>${esc(a.owner||'—')}</b></span><span>${tr('dueDate')}: <b>${a.dueDate||'—'}</b></span><span class="action-badge action-${actionStatus(a)}">${tr(actionStatus(a))}</span></div></div><div class="action-controls"><button class="mini-btn" data-action="edit-action" data-id="${a.id}" title="${tr('edit')}">${icon('edit')}</button><button class="mini-btn" data-action="delete-action" data-id="${a.id}" title="${tr('delete')}">${icon('trash')}</button></div></div>`).join(''):`<div class="empty-state"><div class="empty-state-icon">+</div>${tr('noAction')}</div>`}</div></article>`;
   }
 
   function showToast(message,error=false) {
@@ -611,9 +715,9 @@
   async function importWorkbook(file) {
     try{
       const data=await file.arrayBuffer(),wb=XLSX.read(data,{type:'array',cellDates:true}),touched=new Set();let count=0;
-      wb.SheetNames.forEach(name=>{const cat=sheetCategory(name);if(!cat)return;const rows=XLSX.utils.sheet_to_json(wb.Sheets[name],{header:1,raw:true,defval:''});let h=rows.findIndex(r=>String(r[0]||'').toLowerCase().match(/date|tanggal/));if(h<0)h=0;
+      wb.SheetNames.forEach(name=>{const cat=sheetCategory(name);if(!cat)return;const rows=XLSX.utils.sheet_to_json(wb.Sheets[name],{header:1,raw:true,defval:''});let h=rows.findIndex(r=>String(r[0]||'').toLowerCase().match(/date|tanggal|^data$/));if(h<0)h=0;
         rows.slice(h+1).forEach(row=>{const d=parseExcelDate(row[0]);if(!d)return;const month=`${d.getFullYear()}-${pad(d.getMonth()+1)}`,day=d.getDate();ensureMonth(month);const rec=state.months[month][cat][day]||{};
-          CONFIG[cat].columns.forEach((col,i)=>{if(col.type==='computed')return;let v=row[i+1];if(v===''||v===null||v===undefined)return;if(col.type==='number'){v=Number(v);if(Number.isNaN(v))return;}if(col.type==='boolean')v=['√','✓','1','TRUE','YES','YA','OK'].includes(String(v).trim().toUpperCase())||v===1||v===true;rec[col.key]=v;count++;});
+          CONFIG[cat].columns.forEach((col,i)=>{if(col.type==='computed')return;let v=row[i+1];if(v===''||v===null||v===undefined)return;if(col.type==='number'){v=Number(v);if(Number.isNaN(v))return;}if(col.type==='boolean')v=['√','✓','1','TRUE','YES','YA','SIM','OK'].includes(String(v).trim().toUpperCase())||v===1||v===true;rec[col.key]=v;count++;});
           state.months[month][cat][day]=rec;touched.add(cat);
         });
       });
@@ -625,18 +729,19 @@
     try{
       if(state.activeView!=='overview'){state.activeView='overview';renderShell();await new Promise(r=>setTimeout(r,120));}
       showToast(tr('pdfWorking'));const node=$('#overviewCapture');node.classList.add('exporting');
-      const bg=state.theme==='dark'?'#0b1114':'#f3f6f8';const canvas=await html2canvas(node,{scale:1.45,backgroundColor:bg,useCORS:false,logging:false});node.classList.remove('exporting');
+      const bg=state.theme==='dark'?'#121417':'#edf4fa';const canvas=await html2canvas(node,{scale:1.45,backgroundColor:bg,useCORS:false,logging:false});node.classList.remove('exporting');
       const {jsPDF}=window.jspdf,pdf=new jsPDF({orientation:'landscape',unit:'mm',format:'a3'}),pw=pdf.internal.pageSize.getWidth(),ph=pdf.internal.pageSize.getHeight(),margin=8;
       const ratio=Math.min((pw-margin*2)/canvas.width,(ph-margin*2)/canvas.height),w=canvas.width*ratio,h=canvas.height*ratio,x=(pw-w)/2,y=(ph-h)/2;
       pdf.addImage(canvas.toDataURL('image/jpeg',.92),'JPEG',x,y,w,h,undefined,'FAST');pdf.save(`ALFA-SQDCP-Dashboard-${state.month}.pdf`);showToast(tr('pdfReady'));
-    }catch(err){console.error(err);$('#overviewCapture')?.classList.remove('exporting');showToast('PDF export failed. Use browser Print → Save as PDF.',true);}
+    }catch(err){console.error(err);$('#overviewCapture')?.classList.remove('exporting');showToast(tr('pdfError'),true);}
   }
 
   $('#excelFile').addEventListener('change',e=>{const f=e.target.files[0];if(f)importWorkbook(f);e.target.value='';});
   $('#app').addEventListener('click',e=>{
     const btn=e.target.closest('[data-action]');if(!btn)return;const a=btn.dataset.action;
     if(a==='navigate'){state.activeView=btn.dataset.view;saveState();renderShell();}
-    else if(a==='toggle-menu')$('#sidebar').classList.toggle('open');
+    else if(a==='toggle-menu'){const open=$('#sidebar').classList.toggle('open');$('#sidebarBackdrop')?.classList.toggle('open',open);}
+    else if(a==='collapse'){state.sidebarCollapsed=!state.sidebarCollapsed;$('#sidebar').classList.toggle('collapsed',state.sidebarCollapsed);$('.app-shell').classList.toggle('is-collapsed',state.sidebarCollapsed);saveState();}
     else if(a==='theme'){state.theme=state.theme==='dark'?'light':'dark';saveState();renderShell();}
     else if(a==='language'){state.language=btn.dataset.lang;saveState();renderShell();}
     else if(a==='import')$('#excelFile').click();
@@ -671,6 +776,10 @@
     if(e.target.id==='holidayForm'){e.preventDefault();const fd=new FormData(e.target),date=fd.get('date'),name=String(fd.get('name')||'').trim();if(!date||!name)return showToast(tr('invalidHoliday'),true);state.customHolidays[date]=name;saveState();renderShell();showToast(tr('holidayAdded'));}
   });
   $('#app').addEventListener('keydown',e=>{const n=e.target.closest('.date-node');if(n&&(e.key==='Enter'||e.key===' ')){e.preventDefault();n.dispatchEvent(new MouseEvent('click',{bubbles:true}));}});
+
+  // Impressão pelo navegador (Ctrl+P): sai sempre no tema claro; ao terminar, volta o tema escolhido.
+  window.addEventListener('beforeprint',()=>{document.documentElement.dataset.theme='light';});
+  window.addEventListener('afterprint',()=>{document.documentElement.dataset.theme=state.theme;});
 
   ensureMonth();renderShell();initCloudSync();
 })();

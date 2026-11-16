@@ -1,7 +1,7 @@
 -- ============================================================
 -- S+QDCP Dashboard — PT. ALFA VALVES INDONESIA
--- Jalankan SELURUH script ini di Supabase > SQL Editor > Run.
--- Mode akses: PUBLIC (tanpa login), sesuai pilihan pengguna.
+-- Execute este script INTEIRO em Supabase > SQL Editor > Run.
+-- Modo de acesso: PÚBLICO (sem login), conforme a escolha do usuário.
 -- ============================================================
 
 create table if not exists public.sqdcp_dashboard (
@@ -12,12 +12,12 @@ create table if not exists public.sqdcp_dashboard (
 
 alter table public.sqdcp_dashboard enable row level security;
 
--- Hapus policy lama agar script aman dijalankan kembali.
+-- Remove as policies antigas para que o script possa ser executado novamente com segurança.
 drop policy if exists "Public can read S+QDCP dashboard" on public.sqdcp_dashboard;
 drop policy if exists "Public can insert S+QDCP dashboard" on public.sqdcp_dashboard;
 drop policy if exists "Public can update S+QDCP dashboard" on public.sqdcp_dashboard;
 
--- PERINGATAN: policy berikut sengaja membuka akses baca/tulis tanpa login.
+-- ATENÇÃO: as policies a seguir liberam de propósito a leitura e a escrita sem login.
 create policy "Public can read S+QDCP dashboard"
 on public.sqdcp_dashboard for select
 to anon, authenticated
@@ -34,7 +34,7 @@ to anon, authenticated
 using (true)
 with check (true);
 
--- Aktifkan tabel pada Supabase Realtime publication.
+-- Ativa a tabela na publicação do Supabase Realtime.
 do $$
 begin
   if not exists (
@@ -48,10 +48,10 @@ begin
   end if;
 end $$;
 
--- Buat record utama jika belum ada.
+-- Cria o registro principal, caso ainda não exista.
 insert into public.sqdcp_dashboard (id, payload)
 values ('pt-alfa-valves-indonesia-main', '{}'::jsonb)
 on conflict (id) do nothing;
 
--- Verifikasi hasil.
+-- Confere o resultado.
 select id, updated_at, payload from public.sqdcp_dashboard;

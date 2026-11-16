@@ -1,13 +1,17 @@
 <!doctype html>
-<html lang="id" data-theme="light">
+<html lang="pt-BR" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Dashboard S+QDCP PT. ALFA VALVES INDONESIA" />
+  <meta name="description" content="Painel S+QDCP da PT. ALFA VALVES INDONESIA" />
+  <meta name="theme-color" content="#121417" />
   <title>S+QDCP Command Center — PT. ALFA VALVES INDONESIA</title>
+  <link rel="stylesheet" href="vendor/fonts/fonts.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Fundo ambiente (decorativo): fica fora de #app para não ser redesenhado a cada atualização. -->
+  <div class="ambient" aria-hidden="true"><i class="orb orb-a"></i><i class="orb orb-b"></i><i class="orb orb-c"></i></div>
   <div id="app"></div>
   <input id="excelFile" type="file" accept=".xlsx,.xls,.csv" hidden />
   <div id="toastRegion" class="toast-region" aria-live="polite"></div>
