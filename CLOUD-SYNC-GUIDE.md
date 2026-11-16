@@ -1,36 +1,36 @@
-# Mengaktifkan Live Update PC ↔ HP dengan Supabase
+# Como ativar a atualização ao vivo PC ↔ celular com o Supabase
 
-## Mengapa data sebelumnya tidak sama?
+## Por que os dados não eram os mesmos antes?
 
-Versi awal memakai `localStorage`. Penyimpanan ini hanya berada di browser/perangkat masing-masing. Data yang dimasukkan dari PC tidak pernah dikirim ke GitHub atau ke HP. GitHub Pages hanya menyajikan file HTML/CSS/JavaScript dan bukan database.
+A primeira versão usava `localStorage`. Esse armazenamento existe apenas no navegador/dispositivo de cada pessoa. Os dados digitados no PC nunca eram enviados para o GitHub nem para o celular. O GitHub Pages apenas entrega os arquivos HTML/CSS/JavaScript; ele não é um banco de dados.
 
-Versi ini menambahkan **Supabase Cloud Sync + Realtime**. Setelah dikonfigurasi, PC dan HP akan membaca record dashboard yang sama dan menerima pembaruan otomatis.
+Esta versão acrescenta o **Supabase Cloud Sync + Realtime**. Depois de configurado, o PC e o celular leem o mesmo registro do painel e recebem as atualizações automaticamente.
 
-## Langkah 1 — Buat project Supabase
+## Passo 1 — Criar o projeto no Supabase
 
-1. Buka https://supabase.com dan masuk.
-2. Pilih **New project**.
-3. Isi nama, misalnya `alfa-valves-sqdcp`.
-4. Pilih region terdekat, lalu tunggu project siap.
+1. Abra https://supabase.com e entre na sua conta.
+2. Escolha **New project**.
+3. Informe um nome, por exemplo `alfa-valves-sqdcp`.
+4. Escolha a região mais próxima e aguarde o projeto ficar pronto.
 
-## Langkah 2 — Buat tabel dan policy
+## Passo 2 — Criar a tabela e as policies
 
-1. Di Supabase, buka **SQL Editor**.
-2. Klik **New query**.
-3. Salin seluruh isi file `SUPABASE-SETUP.sql`.
-4. Klik **Run**.
-5. Pastikan hasil terakhir menampilkan record `pt-alfa-valves-indonesia-main`.
+1. No Supabase, abra o **SQL Editor**.
+2. Clique em **New query**.
+3. Copie todo o conteúdo do arquivo `SUPABASE-SETUP.sql`.
+4. Clique em **Run**.
+5. Confira se o último resultado mostra o registro `pt-alfa-valves-indonesia-main`.
 
-Script tersebut juga mendaftarkan tabel ke Supabase Realtime.
+O script também registra a tabela no Supabase Realtime.
 
-## Langkah 3 — Isi konfigurasi website
+## Passo 3 — Preencher a configuração do site
 
-1. Di Supabase, buka **Project Settings → API** atau menu **Connect**.
-2. Salin:
-   - **Project URL**
-   - **Publishable key** atau legacy **anon public key**
-3. Buka file `supabase-config.js` di repository GitHub.
-4. Isi seperti contoh berikut:
+1. No Supabase, abra **Project Settings → API** ou o menu **Connect**.
+2. Copie:
+   - a **Project URL**
+   - a **Publishable key** ou a antiga **anon public key**
+3. Abra o arquivo `supabase-config.js` no repositório do GitHub.
+4. Preencha como no exemplo abaixo:
 
 ```js
 window.SUPABASE_CONFIG = {
@@ -40,52 +40,52 @@ window.SUPABASE_CONFIG = {
 };
 ```
 
-5. Commit perubahan ke branch yang dipakai GitHub Pages.
-6. Tunggu status **Actions/Deployments** selesai.
+5. Faça o commit da alteração na branch usada pelo GitHub Pages.
+6. Aguarde o status de **Actions/Deployments** terminar.
 
-> Jangan pernah memasukkan `service_role key`. Gunakan hanya Publishable key atau anon public key.
+> Nunca coloque a `service_role key`. Use somente a Publishable key ou a anon public key.
 
-## Langkah 4 — Sinkronisasi pertama dan verifikasi
+## Passo 4 — Primeira sincronização e verificação
 
-> Penting: karena data terbaru saat ini berada di localStorage PC, lakukan pembukaan pertama dari **PC tersebut**. Tutup halaman dashboard di HP sampai langkah 2 selesai.
+> Importante: como os dados mais recentes hoje estão no localStorage do PC, faça a primeira abertura a partir **desse PC**. Mantenha a página do painel fechada no celular até concluir o item 2.
 
-1. Buka website di PC yang menyimpan data terbaru dan lakukan hard refresh (`Ctrl+Shift+R`).
-2. Tunggu indikator di kanan judul berubah menjadi **“Live • Cloud tersinkron”**. Data lokal PC akan menjadi data awal cloud jika database masih kosong.
-3. Setelah itu, buka website di HP dan refresh halaman.
-4. Indikator di HP juga harus berubah menjadi **“Live • Cloud tersinkron”**.
-5. Ubah satu nilai dari PC.
-6. Dalam kondisi normal, HP menerima pembaruan otomatis kurang dari beberapa detik tanpa impor Excel.
+1. Abra o site no PC que guarda os dados mais recentes e faça um hard refresh (`Ctrl+Shift+R`).
+2. Aguarde o indicador à direita do título mudar para **“Ao vivo • Nuvem sincronizada”**. Os dados locais do PC passam a ser os dados iniciais da nuvem se o banco ainda estiver vazio.
+3. Depois disso, abra o site no celular e atualize a página.
+4. O indicador no celular também deve mudar para **“Ao vivo • Nuvem sincronizada”**.
+5. Altere um valor pelo PC.
+6. Em condições normais, o celular recebe a atualização automaticamente em poucos segundos, sem importar Excel.
 
-Jika indikator masih **“Mode lokal • Cloud belum diatur”**, file `supabase-config.js` pada GitHub Pages belum berisi URL/key atau versi deploy belum terbaru.
+Se o indicador continuar em **“Modo local • Nuvem não configurada”**, o arquivo `supabase-config.js` no GitHub Pages ainda não tem a URL/key ou a versão publicada não é a mais recente.
 
-Jika indikator menunjukkan **“Cloud terputus”**:
+Se o indicador mostrar **“Nuvem desconectada”**:
 
-- periksa URL dan key;
-- pastikan `SUPABASE-SETUP.sql` sudah dijalankan;
-- pastikan nama tabel adalah `sqdcp_dashboard`;
-- cek browser Console untuk pesan error;
-- periksa bahwa project Supabase tidak sedang paused.
+- confira a URL e a key;
+- confira se o `SUPABASE-SETUP.sql` já foi executado;
+- confira se o nome da tabela é `sqdcp_dashboard`;
+- veja as mensagens de erro no Console do navegador;
+- verifique se o projeto do Supabase não está pausado.
 
-## Perilaku sinkronisasi
+## Comportamento da sincronização
 
-Yang disinkronkan:
+O que é sincronizado:
 
-- seluruh data bulanan;
-- target KPI;
-- action plan;
-- hari libur kustom.
+- todos os dados mensais;
+- as metas de KPI;
+- o plano de ação;
+- os feriados personalizados.
 
-Yang tetap khusus per perangkat:
+O que continua sendo específico de cada dispositivo:
 
-- bahasa;
-- tema terang/gelap;
-- halaman/kategori yang sedang dibuka;
-- pilihan bulan yang sedang ditampilkan.
+- o idioma;
+- o tema claro/escuro;
+- a página/categoria que está aberta;
+- o mês que está sendo exibido.
 
-Jika internet terputus, perubahan tetap tersimpan di browser dan dashboard mencoba mengirim ulang saat koneksi cloud tersedia.
+Se a internet cair, as alterações continuam salvas no navegador e o painel tenta reenviá-las quando a conexão com a nuvem voltar.
 
-## Catatan keamanan mode PUBLIC
+## Nota de segurança do modo PÚBLICO
 
-Konfigurasi saat ini mengikuti pilihan **akses publik tanpa login**. Artinya, siapa pun yang mengetahui URL website dapat membaca dan mengubah data melalui website/API. Mode ini praktis, tetapi tidak cocok untuk data rahasia.
+A configuração atual segue a escolha de **acesso público sem login**. Isso significa que qualquer pessoa que conheça a URL do site pode ler e alterar os dados pelo site/API. Esse modo é prático, mas não serve para dados confidenciais.
 
-Untuk penggunaan produksi yang lebih aman, disarankan versi berikutnya memakai Supabase Authentication sehingga publik hanya dapat melihat dan staf wajib login untuk mengubah data.
+Para um uso em produção com mais segurança, recomenda-se que a próxima versão use o Supabase Authentication, de modo que o público só possa visualizar e a equipe precise fazer login para alterar os dados.

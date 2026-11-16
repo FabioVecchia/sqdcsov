@@ -1,9 +1,9 @@
-# Checklist Update GitHub Pages — Live Sync v1.2
+# Checklist de atualização do GitHub Pages — Live Sync v1.2
 
-1. Download dan ekstrak paket versi Live Sync.
-2. Di Supabase, jalankan `SUPABASE-SETUP.sql` melalui SQL Editor.
-3. Isi `url` dan `anonKey` di `supabase-config.js`.
-4. Upload/replace file berikut di repository GitHub:
+1. Baixe e extraia o pacote da versão Live Sync.
+2. No Supabase, execute o `SUPABASE-SETUP.sql` pelo SQL Editor.
+3. Preencha `url` e `anonKey` em `supabase-config.js`.
+4. Envie/substitua os seguintes arquivos no repositório do GitHub:
    - `index.html`
    - `app.js`
    - `styles.css`
@@ -12,18 +12,19 @@
    - `CLOUD-SYNC-GUIDE.md`
    - `README.md`
    - `vendor/supabase.min.js`
-5. Pastikan file vendor lama tetap ada:
+   - `vendor/fonts/` (pasta inteira — fontes usadas pelo layout)
+5. Confira se os arquivos antigos da pasta vendor continuam lá:
    - `vendor/xlsx.full.min.js`
    - `vendor/html2canvas.min.js`
    - `vendor/jspdf.umd.min.js`
-6. Tunggu bagian **Deployments → github-pages** berstatus hijau.
-7. Tutup dashboard pada HP untuk sementara.
-8. Di PC yang menyimpan data terbaru, tekan `Ctrl+Shift+R` dan tunggu indikator **Live • Cloud tersinkron**.
-9. Setelah PC tersinkron, buka/refresh dashboard di HP.
-10. Jika HP masih memuat versi lama, hapus cache situs atau buka URL dengan parameter sementara, misalnya:
+6. Aguarde a seção **Deployments → github-pages** ficar com o status verde.
+7. Feche o painel no celular por enquanto.
+8. No PC que guarda os dados mais recentes, pressione `Ctrl+Shift+R` e aguarde o indicador **Ao vivo • Nuvem sincronizada**.
+9. Depois que o PC estiver sincronizado, abra/atualize o painel no celular.
+10. Se o celular ainda carregar a versão antiga, limpe o cache do site ou abra a URL com um parâmetro temporário, por exemplo:
 
 ```
-https://NAMA-USER.github.io/NAMA-REPO/?v=1.2
+https://NOME-USUARIO.github.io/NOME-REPO/?v=1.2
 ```
 
-Parameter tersebut tidak mengubah data; hanya membantu memaksa browser mengambil versi deployment terbaru.
+Esse parâmetro não altera os dados; ele só ajuda a forçar o navegador a buscar a versão publicada mais recente.
